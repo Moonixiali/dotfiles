@@ -1,0 +1,11 @@
+@import url('/home/moonixiali/.cache/wal/colors-waybar.css');
+
+:root {
+    --border-color: alpha(@background,0.0);
+    --border-color-active: alpha(@color6, .2);
+    --bg-color: alpha(@background,.4);
+    --bg-color-hover: alpha(@background,.6);
+    --index-border-color: alpha(@background,.2);
+    --border-radius: 10px;
+    --border-size: 0px;
+}

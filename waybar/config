@@ -1,0 +1,149 @@
+{
+        "layer": "top",
+        "position": "top",
+        "reload_style_on_change": true,
+        "modules-left": ["hyprland/workspaces","custom/workspace","hyprland/window"],
+        "modules-center": ["mpris"],
+        "modules-right": ["group/expand","tray","clock","bluetooth","custom/notification"],
+        "output": ["DP-1"],
+
+
+        "hyprland/workspaces": {
+            "format": "{name}",
+            "format-icons": {
+                "active": "",
+                "default": "",
+                "empty": ""
+            },
+            "persistent-workspaces": {
+                "*": [ 1,2,3,4,5 ]
+            }
+        },
+        "mpris": {
+            "format": "{player_icon} {artist} - {title}",
+            "format-paused": "{status_icon} {artist} - {title}",
+            "player-icons": {
+                "default": "",
+                "mpv": "🎵"
+            },
+            "status-icons": {
+                "paused": ""
+            },
+            "player": "spotify"
+        },
+        "custom/workspace": {
+            "exec": "hyprctl activeworkspace -j | jq '.id'",
+            "format": "Workspace {} | ",
+            "return-type": "",
+            "interval": "once",
+            "signal": 8
+        },
+        "custom/notification": {
+            "tooltip": false,
+            "format": "",
+            "on-click": "swaync-client -t -sw",
+            "escape": true
+        },
+        "clock": {
+            "format": "{:%d/%m/%Y %I:%M:%S %p} ",
+            "interval": 1,   
+            "tooltip-format": "<tt>{calendar}</tt>",
+            "calendar": {
+                "format": {
+                    "today": "<span color='#fAfBfC'><b>{}</b></span>"
+                }
+            },
+            "actions": {
+                "on-click-right": "shift_down",
+                "on-click": "shift_up"
+            }
+        },
+        "network": {
+            "format-wifi": "",
+            "format-ethernet":"",
+            "format-disconnected": "",
+            "tooltip-format-disconnected": "Error",
+            "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+            "tooltip-format-ethernet": "{ifname} 🖧 ",
+            "on-click": "kitty nmtui"
+        },
+        "bluetooth": {
+            "format-on": "󰂯",
+            "format-off": "BT-off",
+            "format-disabled": "󰂲",
+            "format-connected-battery": "{device_battery_percentage}% 󰂯",
+            "format-alt": "{device_alias} 󰂯",
+            "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+            "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+            "tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
+            "tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
+            "on-click-right": "blueman-manager",
+        },
+        "battery": {
+            "interval":30,
+            "states": {
+                "good": 95,
+                "warning": 30,
+                "critical": 20
+            },
+            "format": "{capacity}% {icon}",
+            "format-charging": "{capacity}% 󰂄",
+            "format-plugged": "{capacity}% 󰂄 ",
+            "format-alt": "{time} {icon}",
+            "format-icons": [
+                "󰁻",
+            "󰁼",
+            "󰁾",
+            "󰂀",
+            "󰂂",
+            "󰁹"
+            ],
+        },
+        "hyprland/window": {
+            //"format": "{}"   // <--- these is the default value
+            "max-length": 40,
+            "format": "{}"
+        },
+        "custom/expand": {
+            "format": "",
+            "tooltip": false
+        },
+        "custom/endpoint":{
+            "format": "|",
+            "tooltip": false
+        },
+        "group/expand": {
+            "orientation": "horizontal",
+            "drawer": {
+                "transition-duration": 600,
+                "transition-to-left": true,
+                "click-to-reveal": true
+            },
+            "modules": ["custom/expand","cpu","memory","temperature", "custom/gpuu", "custom/endpoint"],
+        },
+        "cpu": {
+            "interval": 1,
+            "format": "󰻠 {usage}%",
+            "return-type": "",
+            "tooltip": true
+        },
+        "temperature": {
+            "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+            "format": " {temperatureC}°C"
+        },
+        "memory": {
+            "interval": 1,
+            "format": "󰘚 {}%"
+        },
+        "tray": {
+            "icon-size": 14,
+            "spacing": 10
+        },
+        "custom/gpuu": {
+        "exec": "cat /sys/class/hwmon/hwmon2/device/gpu_busy_percent",
+        "format": " {}%",
+        "return-type": "",
+        "interval": 1
+}
+} 
+
